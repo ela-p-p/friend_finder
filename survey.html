@@ -11,10 +11,7 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <!-- Chosen-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    
 </head>
 
 <body>
@@ -172,7 +169,7 @@
         <footer class="footer">
             <div class="container">
                 <p>
-                    <a href="/api.friends">API Friends List</a> |
+                    <a href="/api/friends">API Friends List</a> |
                     <a href="#">GitHub Repo</a>
                 </p>
             </div>
@@ -197,37 +194,13 @@
         </div>
     </div>
     <form>
-
-
-
-
-
-
 </body>
 
 </html>
-
 <script type="text/javascript">
-
     $("#submit").on("click", function (event) {
         event.preventDefault();
-        function validateForm() {
-            var isValid = true;
-            $(".form-control").each(function () {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-            $(".chosen-select").each(function () {
-                if ($(this).val() === "") {
-                    isValid = false;
-                }
-            });
-            return isValid;
-        }
-
-        if (validateForm()) {
-            var userData = {
+              var newFriend = {
                 name: $("#name").val(),
                 photo: $("#photo").val(),
                 scores: [
@@ -243,17 +216,16 @@
                     $("#q10").val(),
                 ]
             };
-            console.log(userData);
+            console.log(newFriend);
 
-            $.post("/api/friends", userData, function (data) {
-                $("#match-name").text(data.name);
-                $("match-img").attr("src", data.photo);
-                $("#results-modal").modal("toggle");
+            $.post("/api/friends", newFriend)
+            .then(function (data) {
+    
+                // $("#match-name").text(data.name);
+                // $("match-img").attr("src", data.photo);
+                // $("#results-modal").modal("toggle");
             });
-        } else {
-            alert("Please fill in all forms!");
-        }
-    });
+        });
 </script>
 </body>
 
